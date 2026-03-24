@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sowbathi Balasubramani — Global IT Operations Specialist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════════════════
+   DESIGN SYSTEM — LUXURY EXECUTIVE PALETTE
+   Inspired by: Bloomberg Terminal × Hermès × McKinsey
+═══════════════════════════════════════════════ */
+:root {
+  --ink:       #0B0C0E;
+  --ink2:      #13151A;
+  --ink3:      #1C1F27;
+  --steel:     #2A2D35;
+  --mist:      #9198A8;
+  --silver:    #C4CAD6;
+  --pearl:     #EEF0F4;
+  --white:     #FAFBFC;
+  --gold:      #C8A96E;
+  --gold2:     #E8C98A;
+  --gold-dim:  rgba(200,169,110,0.12);
+  --gold-line: rgba(200,169,110,0.25);
+  --line:      rgba(255,255,255,0.06);
+  --line2:     rgba(255,255,255,0.1);
+  --card-bg:   rgba(255,255,255,0.03);
+  --card-bg2:  rgba(255,255,255,0.055);
+  --radius:    4px;
+  --radius-lg: 8px;
+}
+
+/* ── RESET & BASE ── */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; font-size:16px; }
+body {
+  background: var(--ink);
+  color: var(--silver);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── CUSTOM CURSOR ── */
+.cursor {
+  position: fixed; width:10px; height:10px; border-radius:50%;
+  background: var(--gold); pointer-events:none; z-index:9999;
+  transform: translate(-50%,-50%); transition: transform 0.1s, width 0.3s, height 0.3s, opacity 0.3s;
+  mix-blend-mode: difference;
+}
+.cursor-ring {
+  position:fixed; width:36px; height:36px; border-radius:50%;
+  border:1px solid rgba(200,169,110,0.5); pointer-events:none; z-index:9998;
+  transform: translate(-50%,-50%); transition: all 0.18s ease;
+}
+
+/* ── LOADER ── */
+.loader {
+  position:fixed; inset:0; background:var(--ink); z-index:9000;
+  display:flex; align-items:center; justify-content:center; flex-direction:column; gap:1.5rem;
+  transition: opacity 0.6s ease, visibility 0.6s;
+}
+.loader.done { opacity:0; visibility:hidden; }
+.loader-name {
+  font-family:'Cormorant Garamond', serif; font-size:clamp(2rem,5vw,3.5rem);
+  font-weight:300; letter-spacing:0.25em; color:var(--white); opacity:0;
+  animation: fadeUp 0.8s ease 0.3s forwards;
+}
+.loader-line {
+  width:0; height:1px; background:var(--gold);
+  animation: expandLine 1s ease 0.9s forwards;
+}
+.loader-sub {
+  font-size:0.7rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--mist);
+  opacity:0; animation: fadeUp 0.6s ease 1.3s forwards;
+}
+@keyframes expandLine { to { width:180px; } }
+@keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
+
+/* ── PROGRESS BAR ── */
+.progress-bar {
+  position:fixed; top:0; left:0; height:2px; background:var(--gold);
+  z-index:500; width:0%; transition:width 0.1s linear;
+}
+
+/* ── NAVIGATION ── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:400;
+  padding:0 4rem; height:68px;
+  display:flex; align-items:center; justify-content:space-between;
+  background: rgba(11,12,14,0.85);
+  backdrop-filter: blur(24px) saturate(1.4);
+  border-bottom: 1px solid var(--line);
+  transform: translateY(-100%);
+  animation: slideDown 0.6s ease 2.2s forwards;
+}
+@keyframes slideDown { to { transform:translateY(0); } }
+.nav-wordmark {
+  font-family:'Cormorant Garamond', serif;
+  font-size:1.3rem; font-weight:400; letter-spacing:0.08em;
+  color:var(--white); text-decoration:none;
+}
+.nav-wordmark em { font-style:normal; color:var(--gold); }
+.nav-menu { display:flex; align-items:center; gap:2.5rem; list-style:none; }
+.nav-menu a {
+  font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase;
+  color:var(--mist); text-decoration:none; font-weight:500;
+  transition:color 0.25s; position:relative;
+}
+.nav-menu a::after {
+  content:''; position:absolute; bottom:-3px; left:0; right:0; height:1px;
+  background:var(--gold); transform:scaleX(0); transform-origin:right;
+  transition:transform 0.3s ease;
+}
+.nav-menu a:hover { color:var(--white); }
+.nav-menu a:hover::after { transform:scaleX(1); transform-origin:left; }
+.nav-hire {
+  font-size:0.7rem; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--gold); border:1px solid var(--gold-line);
+  padding:0.55rem 1.4rem; text-decoration:none; font-weight:500;
+  transition:all 0.3s; border-radius:2px;
+}
+.nav-hire:hover { background:var(--gold); color:var(--ink); }
+
+/* ── SIDE DECORATIONS ── */
+.side-socials {
+  position:fixed; left:2.5rem; bottom:0; z-index:300;
+  display:flex; flex-direction:column; align-items:center; gap:1.25rem;
+  opacity:0; animation:fadeIn 0.6s ease 2.6s forwards;
+}
+.side-socials a {
+  font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase;
+  color:var(--mist); text-decoration:none; writing-mode:vertical-rl;
+  transition:color 0.2s, transform 0.2s;
+}
+.side-socials a:hover { color:var(--gold); transform:translateY(-3px); }
+.side-socials::after {
+  content:''; width:1px; height:80px; background:var(--mist); display:block;
+}
+.side-email {
+  position:fixed; right:2.5rem; bottom:0; z-index:300;
+  display:flex; flex-direction:column; align-items:center; gap:1.25rem;
+  opacity:0; animation:fadeIn 0.6s ease 2.6s forwards;
+}
+.side-email a {
+  font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase;
+  color:var(--mist); text-decoration:none; writing-mode:vertical-rl;
+  transition:color 0.2s, transform 0.2s;
+}
+.side-email a:hover { color:var(--gold); transform:translateY(-3px); }
+.side-email::after {
+  content:''; width:1px; height:80px; background:var(--mist); display:block;
+}
+@keyframes fadeIn { to { opacity:1; } }
+
+/* ══════════════════════════════════════
+   HERO
+══════════════════════════════════════ */
+.hero {
+  min-height:100vh; display:flex; align-items:center;
+  padding:10rem 8rem 6rem; position:relative; overflow:hidden;
+}
+.hero-canvas {
+  position:absolute; inset:0; z-index:0; overflow:hidden;
+}
+/* Geometric grid */
+.hero-canvas::before {
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(200,169,110,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,169,110,0.04) 1px, transparent 1px);
+  background-size:80px 80px;
+  mask-image:radial-gradient(ellipse 70% 70% at 60% 50%, black 20%, transparent 80%);
+}
+/* Dramatic diagonal light */
+.hero-canvas::after {
+  content:'';position:absolute;
+  width:800px;height:800px;border-radius:50%;
+  background:radial-gradient(circle, rgba(200,169,110,0.07) 0%, transparent 65%);
+  top:-200px;right:-100px;
+}
+.hero-accent-line {
+  position:absolute; left:8rem; top:0; bottom:0; width:1px;
+  background:linear-gradient(to bottom, transparent 0%, var(--gold-line) 30%, var(--gold-line) 70%, transparent 100%);
+}
+
+.hero-inner { position:relative; z-index:1; max-width:900px; }
+.hero-eyebrow {
+  display:flex; align-items:center; gap:1rem; margin-bottom:2.5rem;
+  opacity:0; animation:fadeUp 0.7s ease 2.4s forwards;
+}
+.hero-eyebrow::before {
+  content:''; width:32px; height:1px; background:var(--gold);
+}
+.hero-eyebrow-text {
+  font-size:0.68rem; letter-spacing:0.3em; text-transform:uppercase;
+  color:var(--gold); font-weight:500; font-family:'JetBrains Mono', monospace;
+}
+
+.hero-name {
+  font-family:'Cormorant Garamond', serif;
+  font-size:clamp(3.5rem, 8vw, 7.5rem);
+  font-weight:300; line-height:0.92; letter-spacing:-0.01em;
+  color:var(--white); margin-bottom:0.75rem;
+  opacity:0; animation:fadeUp 0.8s ease 2.5s forwards;
+}
+.hero-name .last { font-weight:600; display:block; }
+.hero-name .last em {
+  font-style:italic; color:transparent;
+  -webkit-text-stroke:1px rgba(200,169,110,0.6);
+}
+
+.hero-role {
+  font-size:clamp(0.9rem,1.5vw,1.05rem); color:var(--mist); font-weight:300;
+  letter-spacing:0.05em; margin-bottom:3rem; max-width:560px;
+  border-left:2px solid var(--gold); padding-left:1.25rem;
+  opacity:0; animation:fadeUp 0.7s ease 2.65s forwards;
+}
+
+.hero-ctas {
+  display:flex; gap:1.25rem; align-items:center;
+  opacity:0; animation:fadeUp 0.7s ease 2.8s forwards;
+}
+.cta-primary {
+  display:inline-flex; align-items:center; gap:10px;
+  background:var(--gold); color:var(--ink);
+  padding:0.9rem 2.25rem; font-size:0.75rem;
+  letter-spacing:0.18em; text-transform:uppercase; font-weight:600;
+  text-decoration:none; border-radius:2px;
+  transition:all 0.3s; position:relative; overflow:hidden;
+}
+.cta-primary::before {
+  content:''; position:absolute; inset:0;
+  background:rgba(255,255,255,0.15); transform:translateX(-100%) skewX(-15deg);
+  transition:transform 0.4s ease;
+}
+.cta-primary:hover::before { transform:translateX(150%) skewX(-15deg); }
+.cta-primary:hover { box-shadow:0 8px 32px rgba(200,169,110,0.3); transform:translateY(-2px); }
+.cta-secondary {
+  display:inline-flex; align-items:center; gap:8px;
+  color:var(--silver); font-size:0.75rem; letter-spacing:0.18em;
+  text-transform:uppercase; font-weight:500; text-decoration:none;
+  border-bottom:1px solid var(--line2); padding-bottom:2px;
+  transition:all 0.2s;
+}
+.cta-secondary:hover { color:var(--white); border-color:var(--silver); }
+
+/* Stats row */
+.hero-stats {
+  display:flex; gap:0; margin-top:5rem;
+  border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  opacity:0; animation:fadeUp 0.7s ease 3s forwards;
+}
+.hero-stat {
+  flex:1; padding:2rem 2.5rem;
+  border-right:1px solid var(--line);
+}
+.hero-stat:last-child { border-right:none; }
+.stat-val {
+  font-family:'Cormorant Garamond', serif;
+  font-size:3rem; font-weight:600; color:var(--white); line-height:1;
+  margin-bottom:0.5rem;
+}
+.stat-val sup { font-size:1.2rem; color:var(--gold); }
+.stat-label-text {
+  font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase;
+  color:var(--mist); font-weight:500;
+}
+
+/* ══════════════════════════════════════
+   SECTION FRAMEWORK
+══════════════════════════════════════ */
+section { position:relative; z-index:1; }
+.section-wrap { padding:7rem 8rem; }
+.section-header { margin-bottom:4.5rem; }
+.section-number {
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.68rem; color:var(--gold); letter-spacing:0.2em;
+  margin-bottom:0.75rem; display:block;
+}
+.section-title {
+  font-family:'Cormorant Garamond', serif;
+  font-size:clamp(2.2rem,4vw,3.5rem); font-weight:300;
+  color:var(--white); line-height:1.1; letter-spacing:-0.01em;
+}
+.section-title strong { font-weight:600; }
+.section-rule {
+  width:48px; height:1px; background:var(--gold); margin-top:1.5rem;
+}
+.section-desc {
+  margin-top:1.25rem; color:var(--mist); max-width:480px;
+  font-size:0.95rem; line-height:1.8;
+}
+
+/* ══════════════════════════════════════
+   ABOUT
+══════════════════════════════════════ */
+.about-section { background:var(--ink2); border-top:1px solid var(--line); }
+.about-layout { display:grid; grid-template-columns:1fr 1fr; gap:6rem; align-items:start; }
+.about-prose p {
+  color:var(--silver); line-height:1.95; margin-bottom:1.5rem;
+  font-size:1rem; font-weight:300;
+}
+.about-prose p strong { color:var(--white); font-weight:500; }
+.about-prose p:first-of-type::first-letter {
+  font-family:'Cormorant Garamond', serif; font-size:4rem;
+  font-weight:600; color:var(--gold); float:left; line-height:0.75;
+  margin:0.2rem 0.75rem 0 0;
+}
+
+.profile-card {
+  background:var(--card-bg); border:1px solid var(--line);
+  border-radius:var(--radius-lg); overflow:hidden; position:sticky; top:100px;
+}
+.profile-card-header {
+  background:var(--gold-dim); border-bottom:1px solid var(--gold-line);
+  padding:2rem 2rem 1.5rem;
+}
+.profile-initials {
+  width:64px; height:64px; border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Cormorant Garamond', serif; font-size:1.5rem;
+  font-weight:600; color:var(--ink); margin-bottom:1rem;
+}
+.profile-card-name {
+  font-family:'Cormorant Garamond', serif;
+  font-size:1.25rem; font-weight:500; color:var(--white); margin-bottom:2px;
+}
+.profile-card-title { font-size:0.78rem; color:var(--gold); letter-spacing:0.06em; }
+.profile-info-list { padding:1.5rem 2rem; display:flex; flex-direction:column; gap:1.1rem; }
+.profile-info-item { display:flex; gap:1rem; align-items:flex-start; }
+.info-ico {
+  width:32px; height:32px; border-radius:4px;
+  background:var(--card-bg2); border:1px solid var(--line);
+  display:flex; align-items:center; justify-content:center;
+  font-size:14px; flex-shrink:0; color:var(--gold);
+}
+.info-meta label {
+  display:block; font-size:0.62rem; letter-spacing:0.2em;
+  text-transform:uppercase; color:var(--mist); margin-bottom:2px;
+}
+.info-meta span { font-size:0.85rem; color:var(--silver); font-weight:400; }
+.profile-card-footer {
+  border-top:1px solid var(--line); padding:1.25rem 2rem;
+  display:flex; gap:0.75rem;
+}
+.pf-btn {
+  flex:1; text-align:center; padding:0.6rem; border-radius:2px;
+  font-size:0.68rem; letter-spacing:0.15em; text-transform:uppercase;
+  font-weight:500; text-decoration:none; transition:all 0.2s;
+}
+.pf-btn-primary { background:var(--gold); color:var(--ink); }
+.pf-btn-primary:hover { opacity:0.88; }
+.pf-btn-ghost { border:1px solid var(--line2); color:var(--mist); }
+.pf-btn-ghost:hover { border-color:var(--gold-line); color:var(--gold); }
+
+/* ══════════════════════════════════════
+   EXPERIENCE
+══════════════════════════════════════ */
+.exp-section { border-top:1px solid var(--line); }
+.exp-layout { display:grid; grid-template-columns:200px 1fr; gap:5rem; }
+.exp-timeline-labels { padding-top:0.5rem; }
+.exp-year-list { list-style:none; position:sticky; top:120px; }
+.exp-year-item {
+  font-size:0.68rem; letter-spacing:0.15em; text-transform:uppercase;
+  color:var(--mist); padding:0.75rem 0; cursor:pointer;
+  border-left:2px solid var(--line); padding-left:1rem;
+  transition:all 0.2s; font-family:'JetBrains Mono', monospace;
+}
+.exp-year-item.active, .exp-year-item:hover {
+  color:var(--gold); border-left-color:var(--gold);
+}
+
+.exp-entries { display:flex; flex-direction:column; gap:2px; }
+.exp-entry {
+  background:var(--card-bg); border:1px solid var(--line);
+  border-radius:var(--radius-lg); overflow:hidden;
+  transition:border-color 0.3s; cursor:pointer;
+}
+.exp-entry:hover { border-color:var(--gold-line); }
+.exp-entry.open { border-color:rgba(200,169,110,0.3); }
+.exp-entry-header {
+  padding:2rem 2.5rem; display:flex;
+  justify-content:space-between; align-items:flex-start; gap:1rem;
+}
+.exp-entry-left { flex:1; }
+.exp-tag {
+  display:inline-block; font-size:0.6rem; letter-spacing:0.2em;
+  text-transform:uppercase; color:var(--gold); background:var(--gold-dim);
+  border:1px solid var(--gold-line); padding:3px 10px; border-radius:100px;
+  margin-bottom:0.75rem; font-family:'JetBrains Mono', monospace;
+}
+.exp-role {
+  font-family:'Cormorant Garamond', serif;
+  font-size:1.4rem; font-weight:500; color:var(--white); margin-bottom:4px;
+}
+.exp-org { font-size:0.82rem; color:var(--mist); letter-spacing:0.04em; }
+.exp-entry-right { text-align:right; flex-shrink:0; }
+.exp-period {
+  font-family:'JetBrains Mono', monospace; font-size:0.72rem;
+  color:var(--mist); letter-spacing:0.08em;
+}
+.exp-chevron {
+  font-size:0.7rem; color:var(--mist); margin-top:0.5rem;
+  transition:transform 0.3s; display:block; text-align:right;
+}
+.exp-entry.open .exp-chevron { transform:rotate(180deg); color:var(--gold); }
+
+.exp-entry-body {
+  display:none; padding:0 2.5rem 2.5rem;
+  border-top:1px solid var(--line);
+}
+.exp-entry.open .exp-entry-body { display:block; }
+.exp-body-inner { padding-top:1.75rem; }
+.exp-bullets { list-style:none; display:flex; flex-direction:column; gap:0.85rem; margin-bottom:1.75rem; }
+.exp-bullets li {
+  display:flex; gap:1rem; font-size:0.9rem;
+  color:var(--silver); line-height:1.7; font-weight:300;
+}
+.exp-bullets li::before {
+  content:''; width:4px; height:4px; border-radius:50%;
+  background:var(--gold); margin-top:0.65rem; flex-shrink:0;
+}
+.tech-pills { display:flex; flex-wrap:wrap; gap:6px; }
+.tech-pill {
+  font-size:0.68rem; letter-spacing:0.08em; font-family:'JetBrains Mono', monospace;
+  color:var(--mist); border:1px solid var(--line);
+  padding:3px 10px; border-radius:2px; background:var(--card-bg2);
+  transition:all 0.2s;
+}
+.exp-entry:hover .tech-pill { border-color:rgba(200,169,110,0.15); }
+
+/* ══════════════════════════════════════
+   COMPETENCIES (SKILLS)
+══════════════════════════════════════ */
+.skills-section { background:var(--ink2); border-top:1px solid var(--line); }
+.skills-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5px; background:var(--line); border:1px solid var(--line); border-radius:var(--radius-lg); overflow:hidden; }
+.skill-block {
+  background:var(--ink2); padding:2.25rem 2rem;
+  transition:background 0.25s;
+}
+.skill-block:hover { background:var(--ink3); }
+.skill-block-label {
+  font-size:0.62rem; letter-spacing:0.25em; text-transform:uppercase;
+  color:var(--gold); margin-bottom:1.25rem; font-weight:500;
+  font-family:'JetBrains Mono', monospace; display:flex; align-items:center; gap:8px;
+}
+.skill-block-label::before {
+  content:''; width:16px; height:1px; background:var(--gold);
+}
+.skill-tags { display:flex; flex-wrap:wrap; gap:6px; }
+.skill-tag {
+  font-size:0.78rem; color:var(--silver); font-weight:300;
+  padding:5px 12px; border-radius:2px;
+  border:1px solid var(--line); background:var(--card-bg);
+  transition:all 0.2s;
+}
+.skill-tag:hover { border-color:var(--gold-line); color:var(--gold); }
+.skill-tag.featured {
+  border-color:var(--gold-line); color:var(--gold-dim);
+  background:var(--gold-dim); color:var(--gold2);
+}
+
+/* ══════════════════════════════════════
+   METRICS SHOWCASE
+══════════════════════════════════════ */
+.metrics-section {
+  border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  background:var(--ink);
+}
+.metrics-inner { padding:6rem 8rem; }
+.metrics-row { display:grid; grid-template-columns:repeat(4,1fr); }
+.metric-item {
+  padding:3rem 2.5rem; border-right:1px solid var(--line);
+  position:relative;
+}
+.metric-item:last-child { border-right:none; }
+.metric-item::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg,var(--gold),transparent);
+  opacity:0; transition:opacity 0.3s;
+}
+.metric-item:hover::before { opacity:1; }
+.metric-big {
+  font-family:'Cormorant Garamond', serif;
+  font-size:4.5rem; font-weight:600; color:var(--white);
+  line-height:1; letter-spacing:-0.02em;
+}
+.metric-big span { color:var(--gold); font-weight:300; }
+.metric-desc { font-size:0.78rem; color:var(--mist); margin-top:0.75rem; line-height:1.5; }
+.metric-desc strong { color:var(--silver); display:block; margin-bottom:2px; font-size:0.85rem; }
+
+/* ══════════════════════════════════════
+   CERTIFICATIONS
+══════════════════════════════════════ */
+.certs-section { border-top:1px solid var(--line); }
+.certs-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+.cert-card {
+  background:var(--card-bg); border:1px solid var(--line);
+  border-radius:var(--radius-lg); padding:2.25rem 2rem;
+  transition:all 0.3s; position:relative; overflow:hidden;
+}
+.cert-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg,var(--gold),transparent);
+}
+.cert-card:hover { border-color:var(--gold-line); transform:translateY(-4px); }
+.cert-card.upcoming { opacity:0.55; }
+.cert-icon-wrap {
+  width:52px; height:52px; border-radius:6px;
+  border:1px solid var(--line); display:flex; align-items:center;
+  justify-content:center; font-size:22px; margin-bottom:1.5rem;
+  background:var(--card-bg2);
+}
+.cert-title {
+  font-family:'Cormorant Garamond', serif;
+  font-size:1.2rem; font-weight:500; color:var(--white);
+  margin-bottom:0.5rem; line-height:1.3;
+}
+.cert-meta { font-size:0.72rem; letter-spacing:0.1em; color:var(--mist); }
+.cert-badge {
+  display:inline-block; margin-top:1rem; font-size:0.62rem;
+  letter-spacing:0.18em; text-transform:uppercase; font-weight:500;
+  padding:3px 10px; border-radius:100px; font-family:'JetBrains Mono', monospace;
+}
+.cert-badge.verified { background:rgba(100,200,120,0.1); color:#6fcf97; border:1px solid rgba(100,200,120,0.25); }
+.cert-badge.pending { background:var(--gold-dim); color:var(--gold); border:1px solid var(--gold-line); }
+
+/* ══════════════════════════════════════
+   EDUCATION
+══════════════════════════════════════ */
+.edu-section { background:var(--ink2); border-top:1px solid var(--line); }
+.edu-list { display:flex; flex-direction:column; }
+.edu-row {
+  display:grid; grid-template-columns:120px 1fr 140px;
+  gap:3rem; align-items:center; padding:2.25rem 0;
+  border-bottom:1px solid var(--line); transition:background 0.2s;
+}
+.edu-row:first-child { border-top:1px solid var(--line); }
+.edu-row:hover { background:var(--card-bg); margin:0 -3rem; padding:2.25rem 3rem; }
+.edu-year-range {
+  font-family:'JetBrains Mono', monospace; font-size:0.72rem;
+  color:var(--mist); letter-spacing:0.08em;
+}
+.edu-degree-name {
+  font-family:'Cormorant Garamond', serif;
+  font-size:1.15rem; font-weight:500; color:var(--white); margin-bottom:4px;
+}
+.edu-institution { font-size:0.82rem; color:var(--mist); }
+.edu-level-badge {
+  text-align:right; font-size:0.62rem; letter-spacing:0.18em;
+  text-transform:uppercase; color:var(--gold); font-weight:500;
+  font-family:'JetBrains Mono', monospace;
+}
+
+/* ══════════════════════════════════════
+   CONTACT / CTA
+══════════════════════════════════════ */
+.contact-section {
+  border-top:1px solid var(--line); background:var(--ink);
+  overflow:hidden; position:relative;
+}
+.contact-bg-text {
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  font-family:'Cormorant Garamond', serif; font-size:22vw; font-weight:600;
+  color:rgba(200,169,110,0.025); white-space:nowrap; letter-spacing:-0.05em;
+  user-select:none; pointer-events:none; line-height:1;
+}
+.contact-inner {
+  max-width:700px; margin:0 auto; text-align:center;
+  padding:8rem 4rem; position:relative; z-index:1;
+}
+.contact-eyebrow {
+  font-size:0.68rem; letter-spacing:0.3em; text-transform:uppercase;
+  color:var(--gold); margin-bottom:2rem; font-family:'JetBrains Mono', monospace;
+}
+.contact-headline {
+  font-family:'Cormorant Garamond', serif;
+  font-size:clamp(2.5rem,5vw,4.5rem); font-weight:300; color:var(--white);
+  line-height:1.1; margin-bottom:1.5rem; letter-spacing:-0.02em;
+}
+.contact-headline em { font-weight:600; font-style:normal; color:var(--gold); }
+.contact-sub {
+  font-size:0.95rem; color:var(--mist); max-width:480px;
+  margin:0 auto 3.5rem; line-height:1.8;
+}
+.contact-links-row {
+  display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;
+  margin-bottom:3.5rem;
+}
+.contact-link {
+  display:flex; align-items:center; gap:10px;
+  padding:0.875rem 1.75rem; border:1px solid var(--line);
+  border-radius:2px; text-decoration:none;
+  font-size:0.75rem; letter-spacing:0.12em; text-transform:uppercase;
+  color:var(--silver); background:var(--card-bg); font-weight:500;
+  transition:all 0.25s;
+}
+.contact-link:hover { border-color:var(--gold-line); color:var(--gold); background:var(--gold-dim); }
+.contact-link .cl-ico { font-size:16px; }
+.contact-availability {
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:0.7rem; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--mist); font-family:'JetBrains Mono', monospace;
+}
+.avail-dot {
+  width:8px; height:8px; border-radius:50%; background:#4ade80;
+  box-shadow:0 0 8px rgba(74,222,128,0.5); animation:pulse 2s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+/* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+footer {
+  padding:1.75rem 8rem; border-top:1px solid var(--line);
+  display:flex; justify-content:space-between; align-items:center;
+}
+.footer-left {
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.68rem; color:var(--mist); letter-spacing:0.1em;
+}
+.footer-left span { color:var(--gold); }
+.footer-right { font-size:0.68rem; color:var(--mist); letter-spacing:0.1em; }
+
+/* ══════════════════════════════════════
+   SCROLL ANIMATIONS
+══════════════════════════════════════ */
+.reveal { opacity:0; transform:translateY(28px); transition:opacity 0.8s ease, transform 0.8s ease; }
+.reveal.in { opacity:1; transform:none; }
+.reveal-left { opacity:0; transform:translateX(-28px); transition:opacity 0.8s ease, transform 0.8s ease; }
+.reveal-left.in { opacity:1; transform:none; }
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media(max-width:1100px) {
+  .hero { padding:10rem 4rem 5rem; }
+  .section-wrap { padding:6rem 4rem; }
+  .about-layout { grid-template-columns:1fr; gap:3.5rem; }
+  .exp-layout { grid-template-columns:1fr; }
+  .exp-year-list { display:none; }
+  .metrics-inner { padding:5rem 4rem; }
+  .metrics-row { grid-template-columns:repeat(2,1fr); }
+  .skills-grid { grid-template-columns:repeat(2,1fr); }
+  .certs-grid { grid-template-columns:repeat(2,1fr); }
+  footer { padding:1.75rem 4rem; }
+}
+@media(max-width:768px) {
+  nav { padding:0 1.5rem; }
+  .nav-menu { display:none; }
+  .hero { padding:9rem 1.5rem 4rem; }
+  .hero-accent-line { display:none; }
+  .hero-stats { flex-direction:column; }
+  .hero-stat { border-right:none; border-bottom:1px solid var(--line); }
+  .section-wrap { padding:4rem 1.5rem; }
+  .metrics-inner { padding:4rem 1.5rem; }
+  .metrics-row { grid-template-columns:1fr 1fr; }
+  .skills-grid { grid-template-columns:1fr; }
+  .certs-grid { grid-template-columns:1fr; }
+  .side-socials, .side-email { display:none; }
+  .edu-row { grid-template-columns:1fr; gap:0.5rem; }
+  .edu-row:hover { margin:0; padding:2.25rem 0; }
+  .contact-inner { padding:5rem 1.5rem; }
+  footer { padding:1.5rem 1.5rem; flex-direction:column; gap:0.5rem; text-align:center; }
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<!-- LOADER -->
+<div class="loader" id="loader">
+  <div class="loader-name">Sowbathi B.</div>
+  <div class="loader-line"></div>
+  <div class="loader-sub">Global IT Operations Specialist</div>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-bar" id="progress"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-wordmark">SB<em>.</em></a>
+  <ul class="nav-menu">
+    <li><a href="#about">Profile</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#competencies">Skills</a></li>
+    <li><a href="#certifications">Credentials</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:sowbathi@gmail.com" class="nav-hire">Hire Me</a>
+</nav>
+
+<!-- SIDE DECORATIONS -->
+<div class="side-socials">
+  <a href="https://linkedin.com/in/sowbathi-balasubramani" target="_blank">LinkedIn</a>
+</div>
+<div class="side-email">
+  <a href="mailto:sowbathi@gmail.com">sowbathi@gmail.com</a>
+</div>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero" id="home">
+  <div class="hero-canvas"></div>
+  <div class="hero-accent-line"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <span class="hero-eyebrow-text">Global IT Operations · ITSM · ITIL v4</span>
+    </div>
+    <h1 class="hero-name">
+      Sowbathi
+      <span class="last">Bala<em>subramani</em></span>
+    </h1>
+    <p class="hero-role">
+      Global IT Operations Specialist with 4+ years driving enterprise service excellence
+      across EMEA, APAC &amp; Americas — trusted by international teams for incident mastery,
+      SLA precision, and continuous operational improvement.
+    </p>
+    <div class="hero-ctas">
+      <a href="#contact" class="cta-primary">
+        <span>Open to Opportunities</span>
+        <span>↗</span>
+      </a>
+      <a href="#experience" class="cta-secondary">View Experience →</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="stat-val">100<sup>+</sup></div>
+        <div class="stat-label-text">Tickets resolved daily</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-val">4<sup>+</sup></div>
+        <div class="stat-label-text">Years in global IT ops</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-val">3</div>
+        <div class="stat-label-text">Regions: EMEA · APAC · Americas</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-val">95<sup>%+</sup></div>
+        <div class="stat-label-text">SLA compliance rate</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ABOUT ═══════════ -->
+<section class="about-section" id="about">
+  <div class="section-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">01 — Profile</span>
+      <h2 class="section-title">Bringing <strong>precision</strong><br>to global operations</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="about-layout">
+      <div class="about-prose reveal">
+        <p>I am a <strong>Global IT Operations Specialist</strong> based in Wrocław, Poland, with over four years of experience ensuring enterprise-grade service continuity across three continents. My work sits at the intersection of structured process management, stakeholder coordination, and data-driven improvement.</p>
+        <p>At <strong>Hemmersbach</strong>, I manage a high-velocity environment — handling 100+ global service requests daily while simultaneously serving as the primary escalation authority for P1 and P2 critical incidents. I translate operational complexity into clarity: structured triage, clean handovers, and closed-loop root cause resolution.</p>
+        <p>My background in <strong>Mechanical Engineering and Automotive Design</strong> — with an MSc from Wrocław University of Science and Technology — gives me an unusually analytical lens for IT operations. I think in systems, not silos.</p>
+        <p>I am actively pursuing <strong>ITIL 4 Foundation</strong> certification and hold credentials in CompTIA Security+ and Google Project Management, reflecting a commitment to continuous professional development that matches the pace of global enterprise demands.</p>
+      </div>
+      <div class="profile-card reveal-left">
+        <div class="profile-card-header">
+          <div class="profile-initials">SB</div>
+          <div class="profile-card-name">Sowbathi Balasubramani</div>
+          <div class="profile-card-title">Global IT Operations Specialist</div>
+        </div>
+        <div class="profile-info-list">
+          <div class="profile-info-item">
+            <div class="info-ico">📍</div>
+            <div class="info-meta"><label>Location</label><span>Wrocław, Poland</span></div>
+          </div>
+          <div class="profile-info-item">
+            <div class="info-ico">🏢</div>
+            <div class="info-meta"><label>Current Employer</label><span>Hemmersbach GmbH</span></div>
+          </div>
+          <div class="profile-info-item">
+            <div class="info-ico">🌍</div>
+            <div class="info-meta"><label>Regional Coverage</label><span>EMEA · APAC · Americas</span></div>
+          </div>
+          <div class="profile-info-item">
+            <div class="info-ico">📞</div>
+            <div class="info-meta"><label>Phone</label><span>+48 729 618 770</span></div>
+          </div>
+          <div class="profile-info-item">
+            <div class="info-ico">✉️</div>
+            <div class="info-meta"><label>Email</label><span>sowbathi@gmail.com</span></div>
+          </div>
+          <div class="profile-info-item">
+            <div class="info-ico">🗣️</div>
+            <div class="info-meta"><label>Languages</label><span>English · Tamil · Polish</span></div>
+          </div>
+        </div>
+        <div class="profile-card-footer">
+          <a href="mailto:sowbathi@gmail.com" class="pf-btn pf-btn-primary">Contact</a>
+          <a href="https://linkedin.com/in/sowbathi-balasubramani" target="_blank" class="pf-btn pf-btn-ghost">LinkedIn ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ METRICS ═══════════ -->
+<div class="metrics-section">
+  <div class="metrics-inner">
+    <div class="metrics-row">
+      <div class="metric-item reveal">
+        <div class="metric-big">100<span>+</span></div>
+        <div class="metric-desc"><strong>Tickets Per Day</strong>Global service requests managed and resolved with consistent SLA compliance</div>
+      </div>
+      <div class="metric-item reveal">
+        <div class="metric-big">3</div>
+        <div class="metric-desc"><strong>Global Regions</strong>EMEA, APAC, and Americas — coordinating across time zones daily</div>
+      </div>
+      <div class="metric-item reveal">
+        <div class="metric-big">4<span>yr</span></div>
+        <div class="metric-desc"><strong>Enterprise Experience</strong>Hands-on global IT operations at scale in a Fortune-class environment</div>
+      </div>
+      <div class="metric-item reveal">
+        <div class="metric-big">95<span>%</span></div>
+        <div class="metric-desc"><strong>SLA Compliance</strong>Sustained above-target performance through structured triage and escalation frameworks</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ EXPERIENCE ═══════════ -->
+<section id="experience">
+  <div class="section-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">02 — Career</span>
+      <h2 class="section-title">Professional <strong>Experience</strong></h2>
+      <div class="section-rule"></div>
+      <p class="section-desc">A progressive career in global IT operations, built on engineering precision and service delivery excellence.</p>
+    </div>
+    <div class="exp-layout">
+      <div class="exp-timeline-labels">
+        <ul class="exp-year-list">
+          <li class="exp-year-item active">2025 – Present</li>
+          <li class="exp-year-item">2021 – 2025</li>
+          <li class="exp-year-item">Apr – Sep 2021</li>
+          <li class="exp-year-item">2019 – 2021</li>
+        </ul>
+      </div>
+      <div class="exp-entries">
+
+        <!-- Entry 1 -->
+        <div class="exp-entry open reveal" onclick="toggleExp(this)">
+          <div class="exp-entry-header">
+            <div class="exp-entry-left">
+              <div class="exp-tag">Current Role</div>
+              <div class="exp-role">Global Operations Specialist</div>
+              <div class="exp-org">Hemmersbach GmbH &amp; Co. KG · Poland</div>
+            </div>
+            <div class="exp-entry-right">
+              <div class="exp-period">06/2025 – Present</div>
+              <span class="exp-chevron">▲</span>
+            </div>
+          </div>
+          <div class="exp-entry-body">
+            <div class="exp-body-inner">
+              <ul class="exp-bullets">
+                <li>Coordinate global service requests and dispatch tasks to field engineering teams across EMEA, APAC, and Americas, sustaining SLA compliance above 95%.</li>
+                <li>Serve as primary escalation authority for P1/P2 critical incidents — deploying structured triage frameworks to drive rapid cross-functional resolution.</li>
+                <li>Monitor and analyze KPIs and SLA dashboards in ServiceNow; produce weekly executive-level performance reports for senior management review.</li>
+                <li>Conduct quality audits on 50+ completed tickets weekly, ensuring alignment with ITIL v4 standards and client contractual requirements.</li>
+                <li>Lead workflow optimization initiatives — identifying operational bottlenecks and implementing efficiency-driven process improvements with measurable impact.</li>
+                <li>Support shift handover governance and knowledge base maintenance to ensure operational continuity across global time zones.</li>
+              </ul>
+              <div class="tech-pills">
+                <span class="tech-pill">ServiceNow</span><span class="tech-pill">SAP</span><span class="tech-pill">ITIL v4</span><span class="tech-pill">Incident Management</span><span class="tech-pill">Change Management</span><span class="tech-pill">SLA Compliance</span><span class="tech-pill">KPI Reporting</span><span class="tech-pill">Escalation Handling</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Entry 2 -->
+        <div class="exp-entry reveal" onclick="toggleExp(this)">
+          <div class="exp-entry-header">
+            <div class="exp-entry-left">
+              <div class="exp-tag">3 Years 8 Months</div>
+              <div class="exp-role">Global Operation Support Agent</div>
+              <div class="exp-org">Hemmersbach GmbH &amp; Co. KG · Wrocław, Poland</div>
+            </div>
+            <div class="exp-entry-right">
+              <div class="exp-period">09/2021 – 05/2025</div>
+              <span class="exp-chevron">▼</span>
+            </div>
+          </div>
+          <div class="exp-entry-body">
+            <div class="exp-body-inner">
+              <ul class="exp-bullets">
+                <li>Managed and resolved 100+ global IT support tickets daily across ServiceNow, maintaining consistently high SLA compliance and zero operational downtime.</li>
+                <li>Directed escalation handling for critical incidents, coordinating with international stakeholders across three regions to reduce resolution delays significantly.</li>
+                <li>Drove incident response efficiency improvements through systematic workflow optimization, process automation, and thorough root cause analysis.</li>
+                <li>Built and maintained comprehensive knowledge base documentation — reducing repeat incidents and accelerating onboarding of new team members.</li>
+                <li>Produced regular KPI performance reports and contributed strategic inputs to continuous service improvement (CSI) initiatives aligned with ITIL v4.</li>
+                <li>Collaborated with global stakeholders to align support processes with evolving organizational goals and client expectations.</li>
+              </ul>
+              <div class="tech-pills">
+                <span class="tech-pill">ServiceNow</span><span class="tech-pill">SAP</span><span class="tech-pill">Fieldcode</span><span class="tech-pill">Power BI</span><span class="tech-pill">Root Cause Analysis</span><span class="tech-pill">Knowledge Management</span><span class="tech-pill">Ticket Triage</span><span class="tech-pill">CMDB</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Entry 3 -->
+        <div class="exp-entry reveal" onclick="toggleExp(this)">
+          <div class="exp-entry-header">
+            <div class="exp-entry-left">
+              <div class="exp-tag">Engineering</div>
+              <div class="exp-role">CNC Programmer</div>
+              <div class="exp-org">KCP Sp. z o.o · Poland</div>
+            </div>
+            <div class="exp-entry-right">
+              <div class="exp-period">04/2021 – 09/2021</div>
+              <span class="exp-chevron">▼</span>
+            </div>
+          </div>
+          <div class="exp-entry-body">
+            <div class="exp-body-inner">
+              <ul class="exp-bullets">
+                <li>Programmed and configured CNC machines using Mastercam and SolidWorks, ensuring precision manufacturing output.</li>
+                <li>Interpreted complex technical drawings and performed rigorous quality control inspections.</li>
+                <li>Optimized tool paths and machining parameters, improving production throughput and reducing material waste.</li>
+              </ul>
+              <div class="tech-pills">
+                <span class="tech-pill">Mastercam</span><span class="tech-pill">SolidWorks</span><span class="tech-pill">Quality Control</span><span class="tech-pill">Technical Drawing</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Entry 4 -->
+        <div class="exp-entry reveal" onclick="toggleExp(this)">
+          <div class="exp-entry-header">
+            <div class="exp-entry-left">
+              <div class="exp-tag">Engineering</div>
+              <div class="exp-role">Design Engineer</div>
+              <div class="exp-org">Mirero Sp. z o.o · Wrocław, Poland</div>
+            </div>
+            <div class="exp-entry-right">
+              <div class="exp-period">03/2019 – 03/2021</div>
+              <span class="exp-chevron">▼</span>
+            </div>
+          </div>
+          <div class="exp-entry-body">
+            <div class="exp-body-inner">
+              <ul class="exp-bullets">
+                <li>Designed corrugated plastic packaging solutions using Creo Parametric and AutoCAD, meeting complex client specifications.</li>
+                <li>Conducted detailed feasibility and cost analysis studies, ensuring full manufacturability and commercial viability.</li>
+                <li>Collaborated cross-functionally with production teams to deliver high-quality outputs on schedule.</li>
+              </ul>
+              <div class="tech-pills">
+                <span class="tech-pill">Creo Parametric</span><span class="tech-pill">AutoCAD</span><span class="tech-pill">Cost Analysis</span><span class="tech-pill">Product Design</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ COMPETENCIES ═══════════ -->
+<section class="skills-section" id="competencies">
+  <div class="section-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">03 — Competencies</span>
+      <h2 class="section-title">Skills &amp; <strong>Expertise</strong></h2>
+      <div class="section-rule"></div>
+      <p class="section-desc">A cross-functional toolkit built across years of high-pressure global IT operations.</p>
+    </div>
+    <div class="skills-grid reveal">
+      <div class="skill-block">
+        <div class="skill-block-label">ITSM Platforms</div>
+        <div class="skill-tags">
+          <span class="skill-tag featured">ServiceNow</span>
+          <span class="skill-tag featured">SAP</span>
+          <span class="skill-tag">Fieldcode</span>
+          <span class="skill-tag">CMDB</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-block-label">Data & Analytics</div>
+        <div class="skill-tags">
+          <span class="skill-tag featured">Power BI</span>
+          <span class="skill-tag featured">Tableau</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">Excel</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-block-label">Service Management</div>
+        <div class="skill-tags">
+          <span class="skill-tag featured">ITIL v4</span>
+          <span class="skill-tag">Incident Management</span>
+          <span class="skill-tag">Change Management</span>
+          <span class="skill-tag">Problem Management</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-block-label">Operations</div>
+        <div class="skill-tags">
+          <span class="skill-tag featured">SLA Monitoring</span>
+          <span class="skill-tag">KPI Reporting</span>
+          <span class="skill-tag">Escalation Handling</span>
+          <span class="skill-tag">Root Cause Analysis</span>
+          <span class="skill-tag">Ticket Triage</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-block-label">Coordination</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Vendor Management</span>
+          <span class="skill-tag">Shift Handover</span>
+          <span class="skill-tag">Knowledge Base Mgmt</span>
+          <span class="skill-tag">Workflow Optimization</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-block-label">Productivity</div>
+        <div class="skill-tags">
+          <span class="skill-tag">MS Excel</span>
+          <span class="skill-tag">PowerPoint</span>
+          <span class="skill-tag">Outlook</span>
+          <span class="skill-tag">Teams</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CERTIFICATIONS ═══════════ -->
+<section class="certs-section" id="certifications">
+  <div class="section-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">04 — Credentials</span>
+      <h2 class="section-title">Certifications &amp;<br><strong>Qualifications</strong></h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="certs-grid">
+      <div class="cert-card reveal">
+        <div class="cert-icon-wrap">🛡️</div>
+        <div class="cert-title">CompTIA Security+</div>
+        <div class="cert-meta">CompTIA · 2023</div>
+        <span class="cert-badge verified">✓ Verified</span>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon-wrap">📋</div>
+        <div class="cert-title">Google Project Management Certificate</div>
+        <div class="cert-meta">Google · 2023</div>
+        <span class="cert-badge verified">✓ Verified</span>
+      </div>
+      <div class="cert-card upcoming reveal">
+        <div class="cert-icon-wrap">⚙️</div>
+        <div class="cert-title">ITIL 4 Foundation</div>
+        <div class="cert-meta">Axelos · In Progress</div>
+        <span class="cert-badge pending">In Progress</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ EDUCATION ═══════════ -->
+<section class="edu-section" id="education">
+  <div class="section-wrap">
+    <div class="section-header reveal">
+      <span class="section-number">05 — Education</span>
+      <h2 class="section-title">Academic <strong>Background</strong></h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="edu-list">
+      <div class="edu-row reveal">
+        <div class="edu-year-range">2017 – 2019</div>
+        <div>
+          <div class="edu-degree-name">Master of Science — Automotive Engineering</div>
+          <div class="edu-institution">Wrocław University of Science and Technology · Wrocław, Poland</div>
+        </div>
+        <div class="edu-level-badge">MSc</div>
+      </div>
+      <div class="edu-row reveal">
+        <div class="edu-year-range">2013 – 2016</div>
+        <div>
+          <div class="edu-degree-name">Bachelor of Engineering — Mechanical Engineering</div>
+          <div class="edu-institution">Erode Sengunthar Engineering College · India</div>
+        </div>
+        <div class="edu-level-badge">B.Eng</div>
+      </div>
+      <div class="edu-row reveal">
+        <div class="edu-year-range">2010 – 2013</div>
+        <div>
+          <div class="edu-degree-name">Diploma — Mechanical Engineering</div>
+          <div class="edu-institution">Kongu Polytechnic College · India</div>
+        </div>
+        <div class="edu-level-badge">Diploma</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CONTACT ═══════════ -->
+<section class="contact-section" id="contact">
+  <div class="contact-bg-text">Hire</div>
+  <div class="contact-inner">
+    <div class="contact-eyebrow">06 — Let's Connect</div>
+    <h2 class="contact-headline">
+      Ready for your<br><em>next challenge.</em>
+    </h2>
+    <p class="contact-sub">Open to ITSM, IT Operations, Service Desk Leadership, and Global Support Specialist roles at organizations that demand operational precision and continuous improvement.</p>
+    <div class="contact-links-row">
+      <a href="mailto:sowbathi@gmail.com" class="contact-link">
+        <span class="cl-ico">✉️</span> sowbathi@gmail.com
+      </a>
+      <a href="https://linkedin.com/in/sowbathi-balasubramani" target="_blank" class="contact-link">
+        <span class="cl-ico">💼</span> LinkedIn Profile
+      </a>
+      <a href="tel:+48729618770" class="contact-link">
+        <span class="cl-ico">📞</span> +48 729 618 770
+      </a>
+    </div>
+    <div class="contact-availability">
+      <div class="avail-dot"></div>
+      Available for new opportunities · Wrocław, Poland
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">© 2026 <span>Sowbathi Balasubramani</span> · Global IT Operations Specialist</div>
+  <div class="footer-right">Wrocław, Poland · EMEA · APAC · Americas</div>
+</footer>
+
+<script>
+/* ── LOADER ── */
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('done');
+  }, 2000);
+});
+
+/* ── CURSOR ── */
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+document.addEventListener('mousemove', e => {
+  cur.style.left = e.clientX + 'px';
+  cur.style.top  = e.clientY + 'px';
+  setTimeout(() => {
+    ring.style.left = e.clientX + 'px';
+    ring.style.top  = e.clientY + 'px';
+  }, 80);
+});
+document.querySelectorAll('a, button, .exp-entry').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cur.style.width = '20px'; cur.style.height = '20px';
+    ring.style.width = '52px'; ring.style.height = '52px';
+  });
+  el.addEventListener('mouseleave', () => {
+    cur.style.width = '10px'; cur.style.height = '10px';
+    ring.style.width = '36px'; ring.style.height = '36px';
+  });
+});
+
+/* ── SCROLL PROGRESS ── */
+window.addEventListener('scroll', () => {
+  const scrollTop = document.documentElement.scrollTop;
+  const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progress').style.width = (scrollTop / scrollHeight * 100) + '%';
+});
+
+/* ── REVEAL OBSERVER ── */
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('in'), i * 90);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal, .reveal-left').forEach(el => obs.observe(el));
+
+/* ── EXP ACCORDION ── */
+function toggleExp(el) {
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.exp-entry').forEach(e => e.classList.remove('open'));
+  if (!isOpen) el.classList.add('open');
+}
+
+/* ── NAV ACTIVE ── */
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) current = s.getAttribute('id');
+  });
+  document.querySelectorAll('.nav-menu a').forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + current ? 'var(--gold)' : '';
+  });
+});
+</script>
+</body>
+</html>
